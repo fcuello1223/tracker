@@ -2,13 +2,15 @@ import express, { urlencoded } from "express";
 import cookieParser from "cookie-parser";
 
 import { PORT } from "./config/env.js";
-import authRouter from "./routes/authRoutes.js";
-import userRouter from "./routes/userRoutes.js";
-import subscriptionRouter from "./routes/subscriptionRoutes.js";
 import connectToDB from "./database/connect.js";
+
 import errorMiddleware from "./middlewares/errorMiddleware.js";
 import securityMiddleware from "./middlewares/securityMiddleware.js";
 
+import authRouter from "./routes/authRoutes.js";
+import userRouter from "./routes/userRoutes.js";
+import subscriptionRouter from "./routes/subscriptionRoutes.js";
+import workflowRouter from "./routes/workflowRoutes.js";
 
 const app = express();
 
@@ -20,6 +22,7 @@ app.use(securityMiddleware);
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/subscriptions", subscriptionRouter);
+app.use('/api/workflows', workflowRouter);
 
 app.use(errorMiddleware);
 
